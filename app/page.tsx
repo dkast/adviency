@@ -21,9 +21,9 @@ export default async function Home() {
   const data = await getGifts();
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="rounded-xl bg-orange-50 p-4 shadow-lg w-1/5">
+      <div className="rounded-xl bg-orange-50 p-4 shadow-lg">
         <h1 className="text-red-800 text-2xl mb-6">Regalos</h1>
-        {data.length > 0 && <GiftList gifts={data}></GiftList>}
+        {data.length > 0 && <GiftList data={data}></GiftList>}
       </div>
     </div>
   );
