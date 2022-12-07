@@ -32,11 +32,15 @@ const GiftList = ({ data }: GiftListProps) => {
     );
   };
 
+  const handleDeleteAll = () => {
+    setGifts([]);
+  };
+
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <GiftFormAdd onClick={handleAdd} />
-      {gifts ? (
-        <div>
+      {gifts && gifts.length > 0 ? (
+        <div className="flex flex-col gap-2">
           {gifts.map((gift) => {
             return (
               <GiftItem
@@ -50,7 +54,14 @@ const GiftList = ({ data }: GiftListProps) => {
       ) : (
         <span>No hay regalos</span>
       )}
-    </>
+      <button
+        type="button"
+        className="rounded-lg border border-transparent bg-rose-200 text-rose-800 px-3 py-2 hover:bg-rose-600 hover:text-white disabled:bg-stone-200 disabled:text-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+        onClick={handleDeleteAll}
+      >
+        Borrar todos
+      </button>
+    </div>
   );
 };
 
