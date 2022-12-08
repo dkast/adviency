@@ -37,10 +37,10 @@ const GiftList = ({ data }: GiftListProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8">
       <GiftFormAdd onClick={handleAdd} />
       {gifts && gifts.length > 0 ? (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 px-2">
           {gifts.map((gift) => {
             return (
               <GiftItem
@@ -56,7 +56,7 @@ const GiftList = ({ data }: GiftListProps) => {
       )}
       <button
         type="button"
-        className="rounded-lg border border-transparent bg-rose-200 text-rose-800 px-3 py-2 hover:bg-rose-600 hover:text-white disabled:bg-stone-200 disabled:text-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+        className="rounded-lg m-1 border border-transparent bg-rose-200 text-rose-800 px-3 py-2 hover:bg-rose-600 hover:text-white disabled:bg-stone-200 disabled:text-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
         onClick={handleDeleteAll}
       >
         Borrar todos

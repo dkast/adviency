@@ -9,7 +9,7 @@ const SnowfallBackground = () => {
         width: "100vw",
         height: "100vh",
       }}
-      color="#fed7aa"
+      color="#f3f4f5"
       speed={[0.5, 1.0]}
       snowflakeCount={100}
     />
