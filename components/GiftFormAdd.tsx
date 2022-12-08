@@ -12,7 +12,7 @@ const GiftFormAdd = ({ onClick }: GiftFormAddProps) => {
     <div className="flex gap-2 bg-emerald-500 p-3 text-white">
       <input
         type="text"
-        className="block w-full border-0 border-b border-emerald-400 border-transparent bg-transparent focus:border-emerald-300 focus:ring-0 sm:text-sm"
+        className="block w-full border-0 border-b border-emerald-300 bg-transparent focus:border-emerald-200 focus:ring-0 sm:text-sm"
         value={giftDescription}
         onChange={(e) => setGiftDescription(e.target.value)}
       />

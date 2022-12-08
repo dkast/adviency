@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import SnowfallBackground from "@/components/SnowfallBackground";
 import "./globals.css";
+import ToasterWrapper from "@/components/ToasterWrapper";
 
 export default function RootLayout({
   children,
@@ -17,6 +18,7 @@ export default function RootLayout({
       <head />
       <body className="bg-gradient-to-b from-cyan-100 to-sky-400 relative">
         <SnowfallBackground />
+        <ToasterWrapper />
         <div className="flex flex-col h-screen">
           <main className="grow">{children}</main>
           <footer className="w-full h-48 relative object-cover">

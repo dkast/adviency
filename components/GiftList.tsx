@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import { Gift } from "@/types/gift";
 import GiftFormAdd from "@/components/GiftFormAdd";
 import GiftItem from "@/components/GiftItem";
+import GiftIcon from "@heroicons/react/24/outline/GiftIcon";
+import { toast } from "react-hot-toast";
 
 interface GiftListProps {
   data: Gift[];
@@ -18,6 +20,15 @@ const GiftList = ({ data }: GiftListProps) => {
   }, [data]);
 
   const handleAdd = (giftDescription: string) => {
+    const found = gifts.some((g) => {
+      return g.description === giftDescription;
+    });
+
+    if (found) {
+      toast.error("Regalo ya existe");
+      return;
+    }
+
     const newGift: Gift = {
       description: giftDescription,
     };
@@ -52,7 +63,10 @@ const GiftList = ({ data }: GiftListProps) => {
           })}
         </div>
       ) : (
-        <span>No hay regalos</span>
+        <div className="flex flex-col justify-center items-center text-gray-500">
+          <GiftIcon className="h-6 w-6" />
+          <span>No hay regalos</span>
+        </div>
       )}
       <button
         type="button"
