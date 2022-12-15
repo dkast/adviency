@@ -19,28 +19,31 @@ const schema = z.object({
     .positive("Cantidad debe ser mayor a 0"),
 });
 interface GiftFormAddProps {
-  onSubmit: (gift: Gift) => void;
+  onSaveGift: (gift: Gift) => void;
 }
 
-const GiftFormAdd = ({ onSubmit }: GiftFormAddProps) => {
+const GiftFormAdd = ({ onSaveGift }: GiftFormAddProps) => {
   const [open, setOpen] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    reset,
   } = useForm<Gift>({
     resolver: zodResolver(schema),
   });
 
-  onSubmit = (data: Gift) => {
-    console.dir(data);
+  const onSubmit = (data: Gift) => {
+    onSaveGift(data);
+    reset();
+    setOpen(false);
   };
 
   return (
     <>
-      <div className="flex gap-2 bg-emerald-500 p-3 text-white">
+      <div className="p-4">
         <button
-          className="rounded-full border border-transparent bg-emerald-600 text-white px-3 py-1.5 hover:bg-emerald-800 disabled:bg-emerald-500 disabled:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+          className="rounded-full border border-transparent bg-emerald-600 text-white px-3 py-2 hover:bg-emerald-800 disabled:bg-emerald-500 disabled:text-emerald-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
           type="button"
           onClick={() => setOpen(true)}
         >

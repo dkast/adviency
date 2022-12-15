@@ -9,16 +9,26 @@ import GiftFormAdd from "@/components/GiftFormAdd";
 import GiftItem from "@/components/GiftItem";
 import { Gift } from "@/types/gift";
 
-interface GiftListProps {
-  data: Gift[];
-}
+// interface GiftListProps {
+//   data: Gift[];
+// }
 
-const GiftList = ({ data }: GiftListProps) => {
-  const [gifts, setGifts] = useState<Gift[]>(data);
+const GiftList = () => {
+  const [gifts, setGifts] = useState<Gift[]>(() => {
+    const data = JSON.parse(localStorage.getItem("gifts")!);
+    return data || [];
+  });
 
   useEffect(() => {
-    setGifts(data);
-  }, [data]);
+    localStorage.setItem("gifts", JSON.stringify(gifts));
+  }, [gifts]);
+
+  useEffect(() => {
+    const gitfs = JSON.parse(localStorage.getItem("gifts")!);
+    if (gifts) {
+      setGifts(gifts);
+    }
+  }, []);
 
   const handleAdd = (gift: Gift) => {
     const found = gifts.some((g) => {
@@ -51,11 +61,14 @@ const GiftList = ({ data }: GiftListProps) => {
     <motion.div
       layout
       transition={{ duration: 0.2 }}
-      className="rounded-xl bg-sky-50 overflow-clip shadow-lg shadow-sky-500/60 z-50"
+      className="rounded-xl bg-sky-50 overflow-clip shadow-lg shadow-sky-500/60 z-50 min-w-[20rem]"
     >
-      <div className="bg-emerald-500 text-center">
-        <h1 className="text-white p-4 text-2xl">Regalos</h1>
-        <GiftFormAdd onSubmit={handleAdd} />
+      <div className="bg-emerald-500 text-center flex items-center">
+        <h1 className="text-white p-4 text-3xl flex items-center gap-4">
+          <GiftIcon className="h-7 w-7" />
+          Lista de Regalos
+        </h1>
+        <GiftFormAdd onSaveGift={handleAdd} />
       </div>
       <motion.div className="flex flex-col gap-8 pt-8">
         {gifts && gifts.length > 0 ? (
