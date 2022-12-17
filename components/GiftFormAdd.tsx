@@ -1,23 +1,13 @@
 "use client";
 import React, { useState } from "react";
 import { z } from "zod";
-import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { XMarkIcon } from "@heroicons/react/20/solid";
 
 import Modal from "@/components/Modal";
-import { Gift } from "@/types/gift";
+import { Gift, schema } from "@/types/gift";
 import { useForm } from "react-hook-form";
 
-const schema = z.object({
-  description: z.string().min(1, "Campo es requerido"),
-  imageUrl: z.string().url("URL no es valida"),
-  name: z.string().min(1, "Nombre es requerido"),
-  qty: z
-    .number()
-    .int("Cantidad no es valida")
-    .positive("Cantidad debe ser mayor a 0"),
-});
 interface GiftFormAddProps {
   onSaveGift: (gift: Gift) => void;
 }
@@ -75,7 +65,9 @@ const GiftFormAdd = ({ onSaveGift }: GiftFormAddProps) => {
                 {...register("description")}
                 className="block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
               />
-              <span>{errors.description?.message}</span>
+              <span className="text-red-500 text-sm mt-1">
+                {errors.description?.message}
+              </span>
             </div>
             <div>
               <label
@@ -90,7 +82,9 @@ const GiftFormAdd = ({ onSaveGift }: GiftFormAddProps) => {
                 {...register("imageUrl")}
                 className="block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
               />
-              <span>{errors.imageUrl?.message}</span>
+              <span className="text-red-500 text-sm mt-1">
+                {errors.imageUrl?.message}
+              </span>
             </div>
             <div>
               <label
@@ -105,7 +99,9 @@ const GiftFormAdd = ({ onSaveGift }: GiftFormAddProps) => {
                 {...register("name")}
                 className="block w-full rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
               />
-              <span>{errors.name?.message}</span>
+              <span className="text-red-500 text-sm mt-1">
+                {errors.name?.message}
+              </span>
             </div>
             <div>
               <label
@@ -120,11 +116,14 @@ const GiftFormAdd = ({ onSaveGift }: GiftFormAddProps) => {
                 {...register("qty", { valueAsNumber: true })}
                 className="block w-1/4 rounded-md border-stone-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
               />
-              <span>{errors.qty?.message}</span>
+              <span className="text-red-500 text-sm mt-1">
+                {errors.qty?.message}
+              </span>
             </div>
             <div>
               <button
                 type="submit"
+                disabled={!isValid}
                 className="w-full mt-2 rounded-lg border border-transparent shadow-lg shadow-emerald-300/60 bg-emerald-500 text-white px-3 py-2 hover:bg-emerald-600 hover:text-white disabled:bg-stone-200 disabled:text-stone-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
               >
                 Guardar

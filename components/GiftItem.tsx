@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { TrashIcon } from "@heroicons/react/20/solid";
+import { PencilIcon, TrashIcon } from "@heroicons/react/20/solid";
 import { GiftIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
 
@@ -9,8 +9,9 @@ import { Gift } from "@/types/gift";
 interface GiftItemProps {
   gift: Gift;
   onDelete: (gift: Gift) => void;
+  onEdit: (gift: Gift) => void;
 }
-const GiftItem = ({ gift, onDelete }: GiftItemProps) => {
+const GiftItem = ({ gift, onDelete, onEdit }: GiftItemProps) => {
   return (
     <motion.div
       layout
@@ -40,12 +41,20 @@ const GiftItem = ({ gift, onDelete }: GiftItemProps) => {
           <span className="text-gray-700 text-sm">Para {gift.name}</span>
         </div>
       </div>
-      <button
-        className="rounded border border-transparent text-gray-500 hover:text-rose-600 hover:bg-rose-100 px-2 py-1 disabled:bg-stone-200 disabled:text-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
-        onClick={(e) => onDelete(gift)}
-      >
-        <TrashIcon className="h-4 w-4" />
-      </button>
+      <div>
+        <button
+          className="rounded border border-transparent text-gray-500 hover:text-emerald-600 hover:bg-emerald-100 px-2 py-1 disabled:bg-stone-200 disabled:text-stone-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+          onClick={(e) => onEdit(gift)}
+        >
+          <PencilIcon className="h-4 w-4" />
+        </button>
+        <button
+          className="rounded border border-transparent text-gray-500 hover:text-rose-600 hover:bg-rose-100 px-2 py-1 disabled:bg-stone-200 disabled:text-stone-400 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2"
+          onClick={(e) => onDelete(gift)}
+        >
+          <TrashIcon className="h-4 w-4" />
+        </button>
+      </div>
     </motion.div>
   );
 };
